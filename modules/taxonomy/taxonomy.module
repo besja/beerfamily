@@ -232,9 +232,7 @@ function taxonomy_select_nodes($tid, $pager = TRUE, $limit = FALSE, $order = arr
     list($table_alias, $name) = explode('.', $field);
     $query->addField($table_alias, $name);
   }
-//  vd($query);
-  $col = $query->execute()->fetchCol();
-  return $col;
+  return $query->execute()->fetchCol();
 }
 
 /**

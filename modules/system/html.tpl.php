@@ -48,23 +48,11 @@
 
 <head profile="<?php print $grddl_profile; ?>">
   <?php print $head; ?>
-  <meta name="viewport" content="width=device-width user-scalable=no" />
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
-  
-  <link type="text/css" rel="stylesheet" href="/modules/system/media-queries.css" />
-  <?php if($_SERVER['REQUEST_URI'] == '/') : ?>
-  <script type="text/javascript" src="/sites/all/themes/beerfamily/js/main.js"></script>
-  <?php endif; ?>
-  
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
-	<div class="mobile_menu">
-  	<span></span>
-    <span></span>
-    <span></span>
-  </div>
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
   </div>

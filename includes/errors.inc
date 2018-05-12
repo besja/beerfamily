@@ -172,7 +172,6 @@ function _drupal_log_error($error, $fatal = FALSE) {
   // Initialize a maintenance theme if the bootstrap was not complete.
   // Do it early because drupal_set_message() triggers a drupal_theme_initialize().
   if ($fatal && (drupal_get_bootstrap_phase() != DRUPAL_BOOTSTRAP_FULL)) {
-    kpr($error);
     unset($GLOBALS['theme']);
     if (!defined('MAINTENANCE_MODE')) {
       define('MAINTENANCE_MODE', 'error');
