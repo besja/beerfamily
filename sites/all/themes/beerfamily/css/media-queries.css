@@ -1,0 +1,564 @@
+body{
+	overflow-x:hidden;
+}
+
+.mobile_menu{
+	display:none;
+}
+
+.menu-main-container > ul > li.active-trail.expanded > a:before{
+	left:50%;
+	margin-left:-14px;
+}
+
+
+
+/*
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 1370px) {
+
+.views-field.views-field-field-image,
+.field-content,
+.views-field-title-field-et{
+	text-align:center;
+	max-width:inherit !important;
+}
+
+.view-beers-nodes img{
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+}
+
+.view.view-distributions.view-id-distributions .field-content{
+	text-align:left;
+}
+
+
+}
+/* /1370px */
+
+
+/*
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 1230px) {
+	
+
+.footer .contacts .letter{
+	margin-left:0px;
+}
+
+.footer .contacts{
+	padding-bottom:30px;
+}
+
+.menu-main-container > ul > li > a{
+	font-size:18px;
+}
+
+
+}
+/* /1230px */
+
+
+/*
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 1024px) {
+
+#block-system-main{
+	margin-left:-15px;
+}
+
+
+}
+/* /1024px */
+
+
+/*
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 990px) {
+
+.header-bottom .menu-main-container-wrap{
+	position:fixed;
+	left:0px;
+	top:0px;
+	height:100%;
+	width:100%;
+	margin:0px;
+	display:none;
+	overflow-y:auto;
+}
+
+.header-bottom .menu-main-container-wrap.expanded_menu{
+	display:block;
+}
+
+.menu-main-container{
+	margin:0px;
+}
+
+.menu-main-container > ul{
+	text-align:center;
+	padding-top:40px;
+	overflow:auto;
+}
+
+.menu-main-container > ul li{
+	display:block;
+	height:auto;
+	padding-bottom:15px;
+	margin:0px;
+}
+
+.menu-main-container > ul > li > a{
+	height:auto;
+	padding:10px 0;
+	font-size:18px;
+	line-height:19px;
+}
+
+.menu-main-container > ul > li.expanded > ul.menu{
+	display:block;
+	text-align:center;
+	position:static;
+	background:none;
+}
+
+.menu-main-container > ul > li.expanded > ul.menu{
+	display:block;
+}
+
+.menu-main-container > ul > li.expanded > ul.menu a{
+	color:#ffec00;
+	font-size:16px;
+	line-height:17px;
+}
+
+.menu-main-container > ul > li ul > li,
+.menu-main-container > ul > li ul > li a{
+	display:block;
+}
+
+.menu-main-container > ul > li ul > li{
+	padding-bottom:10px;
+	padding-top:10px;
+}
+
+.head-right-corner{
+	display:inline-block;
+	vertical-align:top;
+	position:relative;
+	top:-40px;
+	right:40px;
+	float:right;
+}
+
+.reka-logo{
+	width:110px;
+	position:absolute;
+	top:30px;
+	left:220px;
+}
+
+.header-top{
+	padding-bottom:0px;
+}
+
+.mobile_menu{
+	display:block;
+	position:absolute;
+	top:5px;
+	right:10px;
+	width:30px;
+	height:30px;
+	z-index:1000;
+	cursor:pointer;
+}
+.mobile_menu.expanded_menu{
+	top:13px;
+	position:fixed;
+}
+	.mobile_menu span{
+		background:#fff;
+		height:4px;
+		width:30px;
+		margin:5px 0 0;
+		display:block;
+	}
+	
+	.expanded_menu span:last-child{
+		display:none;
+	}
+	.expanded_menu span:first-child{
+		-webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+		position:absolute;
+		top:0px;
+		left:0px;
+	}
+	.expanded_menu span:nth-child(2){
+		-webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+	}
+
+.view-beers-nodes img{
+	width:auto !important;
+	height:auto !important;
+	max-width:100%;
+}
+
+.col-sm-3{
+	overflow:hidden;
+	text-align:center;
+}
+
+.container{
+	width:auto;
+}
+
+#block-locale-language{
+	right:10px;
+}
+
+.container-darken.container-content-pad .col-sm-12{
+	width:50%;
+}
+
+.beer-characteristics{
+	padding-bottom:20px;
+}
+
+.address-list{
+	padding-top:20px;
+}
+
+h2.yellow{
+	padding-top:10px;
+}
+
+.item-list .pager li{
+	padding-left:15px;
+	padding-right:15px;
+	padding-bottom:5px;
+	display:inline-block;
+	margin:0px;
+}
+
+.jobs-item ul{
+	margin-left:20px;
+}
+
+.node-type-place ul.menu-page li{
+	margin-right:30px;
+}
+
+body.node-type-manufacturer .theme-bg, body.node-type-beer .theme-bg{
+	background-position:50% -60px;
+}
+
+#block-system-main{
+	margin-left:0px;
+}
+
+
+}
+/* /990px */
+
+
+/*
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+
+.head-right-corner{
+	display:block;
+	position:static;
+	width:320px;
+	margin:0 auto;
+	float:none;
+}
+
+.reka-logo{
+	width:130px;
+	position:relative;
+	top:-40px;
+	left:0px;
+}
+
+.header .col-md-4.col-sm-12{
+	text-align:center;
+}
+
+.header{
+	padding-top:28px;
+}
+
+#block-locale-language{
+	top:-20px;
+	left:10px;
+}
+
+.item-list .pager li{
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.footer{
+	padding-bottom:60px;
+}
+
+.footer .contacts,
+.footer .col-sm-12.col-md-5.col-md-push-1,
+.field-items,
+.region.region-before-content,
+.view.view-distributions.view-id-distributions .field-content,
+.container-darken.container-content-pad .col-sm-12,
+.search-snippet-info{
+	text-align:center;
+}
+
+.search-results .search-snippet-info{
+	padding-left:0px;
+}
+
+.field-items .field-item{
+	margin-bottom:10px;
+}
+
+.view.view-distributions .views-field{
+	float:none;
+}
+
+.view.view-distributions .views-field-field-logo,
+.view.view-distributions .views-field{
+	padding-right:0px;
+	margin-right:0px;
+}
+
+.view.view-distributions{
+	margin-left:0px;
+}
+
+.view.view-distributions .views-field-field-logo,
+.view.view-distributions .views-field-field-email, 
+.view.view-distributions .views-field-field-phone{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.beer-characteristics span{
+	margin-right:15px;
+	margin-left:15px;
+}
+
+.jobs-item ul{
+	display:inline-block;
+	margin-left:0px;
+}
+
+.jobs-item .buttons .button{
+	margin-right:3px;
+	margin-left:3px;
+}
+
+.jobs-item{
+	padding-bottom:40px;
+}
+
+.jobs-item input[type="text"]{
+	box-sizing:border-box;
+	width:100%;
+}
+
+.searchform-full{
+	margin-right:50px;
+	position:relative;
+}
+
+	.searchform-full .form-item-keys{
+		width:100%;
+	}
+	
+	.searchform-full input.search-btn{
+		position:absolute;
+		top:0px;
+		right:-50px;
+	}
+	
+.pic.container-darken.pull-left{
+	float:none !important;
+	text-align:center;
+	max-width:315px;
+	margin:0 auto;
+	display:block;
+}
+
+body.node-type-manufacturer .theme-bg, body.node-type-beer .theme-bg{
+	background-position:50% 0;
+}
+
+
+}
+/* /767px */
+
+
+/*
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 766px) {
+	
+.view-content h3,
+.views-field.views-field-field-image,
+.field-content,
+.views-field-title-field-et,
+h1{
+	text-align:center;
+	max-width:inherit !important;
+}
+
+.views-field-title-field-et{
+	margin-bottom:20px;
+}
+
+.view-beers-nodes img{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.row{
+	margin-bottom:0px !important;
+}
+
+.container-darken.container-content-pad .col-sm-12{
+	float:none !important;
+	width:100%;
+	display:table;
+}
+
+.container-content-pad{
+	padding-left:30px;
+	padding-right:30px;
+}
+
+.gallery-processed .gallery-slides .gallery-slide img{
+	height:auto !important;
+	max-width:100% !important;
+}
+
+.gallery-slides{
+	max-width:500px;
+	width:100% !important;
+}
+
+.galleryformatter-greenarrows .view-full{
+	right:auto !important;
+	left:0px !important;
+}
+
+.gallery-thumbs{
+	width:430px !important;
+}
+
+.nav-pager{
+	top:20px;
+	right:50%;
+	margin-right:-50px;
+}
+
+.restaurant-logo{
+	padding-top:30px;
+}
+
+ul.menu-page,
+.field-item.even,
+h3,
+.address-list{
+	text-align:center;
+}
+
+	.node-type-place ul.menu-page li{
+		display:block;
+		margin-right:0px;
+		margin-left:0px;
+	}
+
+
+}
+/* /750px */
+
+
+/*
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 530px) {
+
+.header-top a.logo{
+	display:block;
+	margin:0 auto;
+}
+
+.reka-logo{
+	top:10px;
+}
+
+.head-right-corner{
+	margin-top:30px;
+	width:280px;
+}
+	
+	.header-top .socials{
+		position:relative;
+		left:-15px;
+	}
+	
+.container-content-pad{
+	padding-right:20px;
+	padding-left:20px;
+}
+
+.view.view-distributions{
+	margin-left:0px;
+}
+
+.view.view-distributions .views-field-field-logo,
+.view.view-distributions .views-field-field-email, .view.view-distributions .views-field-field-phone,
+.view.view-distributions .views-field-field-email, .view.view-distributions .views-field-field-phone{
+	width:100%;
+	float:none;
+	margin-bottom:5px;
+}
+
+.view.view-distributions .views-field-field-email, .view.view-distributions .views-field-field-phone,
+.view.view-distributions .views-field-field-email, .view.view-distributions .views-field-field-phone{
+	margin-bottom:10px;
+}
+
+.view.view-distributions .views-field-field-logo img{
+	max-width:100px;
+}
+
+.gallery-thumbs{
+	width:290px !important;
+}
+
+
+}
+/* /530px */
+
+
+/*
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 370px) {
+
+.beer-characteristics{
+	font-size:20px;
+}
+
+.gallery-thumbs{
+	height:0px !important;
+	padding-top:0px;
+	overflow:hidden;
+}
+
+
+}
+/* /370px */

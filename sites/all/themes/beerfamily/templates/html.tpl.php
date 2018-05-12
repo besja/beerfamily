@@ -53,7 +53,7 @@
   <?php print $styles; ?>
   <?php print $scripts; ?>
   
-  <link type="text/css" rel="stylesheet" href="/modules/system/media-queries.css" />
+  <link type="text/css" rel="stylesheet" href="/sites/all/themes/beerfamily/css/media-queries.css" />
   <?php if($_SERVER['REQUEST_URI'] == '/') : ?>
   <script type="text/javascript" src="/sites/all/themes/beerfamily/js/main.js"></script>
   <?php endif; ?>
