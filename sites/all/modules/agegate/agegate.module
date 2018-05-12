@@ -1,0 +1,123 @@
+<?php
+// $Id: page_example.module,v 1.7 2010/09/03 16:24:03 rfay Exp $
+
+/**
+ * @file
+ * This is an example outlining how a module can be used to display a
+ * custom page at a given URL.
+ */
+
+
+/**
+ * Implements hook_menu().
+ *
+ * hook_menu() must be implemented to emit items to place in the main menu.
+ * This is a required step for modules wishing to display their own pages,
+ * because the process of creating the links also tells Drupal what
+ * callback function to use for a given URL. The menu items returned
+ * here provide this information to the menu system.
+ *
+ * With the below menu definitions, URLs will be interpreted as follows:
+ *
+ * If the user accesses http://example.com/?q=examples/page_example/simple, then
+ * the menu system will first look for a menu item with that path. In this case
+ * it will find a match, and execute page_example_simple().
+ *
+ * If the user accesses http://example.com/?q=examples/page_example/arguments,
+ * no match will be found, so the system will look for 'examples/page_example',
+ * which exists, and that page will be displayed.
+ *
+ * If the user accesses http://example.com/?q=examples/page_example/arguments,
+ * the menu system will find no explicit match so will fall back to execute
+ * page_example_description().
+ *
+ * If the user accesses
+ * http://example.com/?q=examples/page_example/arguments/1/2, the menu
+ * system will first look for examples/page_example/arguments/1/2. Not finding
+ * a match, it will look for examples/page_example/arguments/1/%. Again not
+ * finding a match, it will look for examples/page_example/arguments/%/2.
+ * Yet again not finding a match, it will look for
+ * examples/page_example/arguments/%/%. This time it finds a match, and so will
+ * execute page_example_arguments(1, 2). Since the parameters are passed to
+ * the function after the match, the function can do additional checking or
+ * make use of them without resulting to the arg() function.
+ *
+ * The @link menu_example.module Menu Example @endlink provides extensive
+ * examples for hook_menu().
+ */
+function agegate_menu() {
+
+  // This is the minimum information you can provide for a menu item. This menu
+  // item will be created in the default menu.
+  $items['agegate'] = array(
+    'title' => 'Age Gate',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('agegate_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+
+  return $items;
+}
+
+/**
+ * A simple page callback.
+ *
+ * Page callbacks return a renderable array with the content area of the page.
+ * The theme system will later render and surround the content in the
+ * appropriate blocks, navigation, and styling.
+ *
+ * If you do not want to use the theme system (for example for outputting an
+ * image or XML), you should print the content yourself and not return anything.
+ */
+function agegate_form($form, &$form_state) {
+
+  $form['description'] = array(
+    '#type' => 'item',
+    '#title' => t('In order to view this site you must be over the age of 18.'),
+  );
+  $form['over18'] = array(
+    '#type' => 'checkbox',
+    '#title' => "I am over 18",
+    '#description' => 'By checking this box, I declare that I am over the age of 18.',
+  );
+  
+  // Adds a simple submit button that refreshes the form and clears its contents -- this is the default behavior for forms.
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+  
+  return $form;
+}
+
+function agegate_form_submit($form, &$form_state)
+{
+  if (empty($form_state['values']['over18']))
+  {
+    if (isset($_GET['destination'])) unset($_GET['destination']);
+    $form_state['redirect'] = "access-denied";
+  }
+  else
+  {
+    global $user;
+    if (empty($user->uid)) $_SESSION['agegate_passed'] = true;
+    
+    if (!isset($_GET['destination']) || strncmp ($_GET['destination'],"agegate", 7) == 0) 
+      $form_state['redirect'] = "";
+  }
+}
+
+function agegate_url_inbound_alter(&$path, $original_path, $path_language)
+{
+    global $user;
+
+    if (empty($user->uid) && empty($_SESSION['agegate_passed']) &&
+      strncmp ($original_path,"agegate", 7) != 0 &&
+      $original_path != "access-denied" &&
+      $original_path != "user/login")
+    {
+      drupal_goto('agegate',array("query" => array("destination" => drupal_get_path_alias($original_path))));
+    }
+}

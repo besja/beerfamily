@@ -1,0 +1,209 @@
+<?php
+
+
+/**
+ * 
+ * Hook_field_info() implementation
+ */
+function ymap_field_field_info() { 
+  // returning massive
+  return array( 
+    'ymap' => array( 
+      'label' => t('Yandex map field'),
+      'description' => t('Field to display yandex map by given address'), 
+      'default_widget' => 'ymap_widget',                 
+      'default_formatter' => 'ymap_formatter',   
+    ),
+  );
+} //function ymap_field_field_info
+
+
+/**
+ * 
+ * hook_field_widget_info implementation
+ */
+function ymap_field_field_widget_info() { 
+  return array(  
+    'ymap' => array( 
+      'label' => t('Ymap'), 
+      'field types' => array('ymap'), 
+    ),
+  );
+} //function ymap_field_field_widget_info
+
+
+/**
+ * 
+ * Enter description here ...
+ */
+function ymap_field_field_formatter_info() { 
+  return array(  
+    'ymap_formatter' => array( 
+      'label' => t('Yandex map field formatter'), 
+      'field types' => array('ymap'), 
+    ),
+  );
+} //function ymap_field_field_formatter_info
+
+
+/**
+ * 
+ * Hook_field_widget_form implementation
+ * 
+ * @param unknown_type $form
+ * @param unknown_type $form_state
+ * @param unknown_type $field
+ * @param unknown_type $instance
+ * @param unknown_type $langcode
+ * @param unknown_type $items
+ * @param unknown_type $delta
+ * @param unknown_type $element
+ */
+function ymap_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  switch ($instance['widget']['type']) { 
+      case 'ymap':
+        //prepare settings
+        $current_address = isset($items[$delta]['ymap_address']) ? $items[$delta]['ymap_address'] : 
+                            (isset($instance['default_value'][$delta]['ymap_address']) ? $instance['default_value'][$delta]['ymap_address'] : 'Россия, Москва' );
+                            
+        $current_coords = isset($items[$delta]['ymap_coords']) ? $items[$delta]['ymap_coords'] : 
+                            (isset($instance['default_value'][$delta]['ymap_coords']) ? $instance['default_value'][$delta]['ymap_coords'] : '55.753559,37.609218');
+        $current_zoom  = isset($items[$delta]['ymap_zoom']) ? $items[$delta]['ymap_zoom'] : 
+                            (isset($instance['default_value'][$delta]['ymap_zoom']) ? $instance['default_value'][$delta]['ymap_zoom'] : 14);
+        //whether to show the element
+        $show = isset($items[$delta]['ymap_show']) ? $items[$delta]['ymap_show'] : 0;
+        //adding settings
+        $js_settings = array(
+          'address' => $current_address,
+          'coords' => $current_coords,
+          'edit_form' => TRUE, //whether it is a form to edit field
+          'zoom' => $current_zoom,
+        );
+        _ymap_field_add_scripts($js_settings);
+        //output field title and field description
+        $element['ymap_field_title'] = array(
+          '#type' => 'item',
+          '#title' => $element['#title'],
+          '#markup' => $element['#description'],
+        );
+        //whether to show a map
+        $element['ymap_show'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Show the map'),
+          '#description' => t('Check this box if you want to show yandex map on the page. Uncheck this box if you don\'t want to show the map.'),
+          '#weight' => isset($element['#weight']) ? $element['#weight'] : 0,
+          '#delta' => $delta,
+          '#default_value' => $show,
+        );
+        //address field
+        $element['ymap_address'] = array( 
+          '#type' => 'hidden', 
+          '#default_value' => $current_address, 
+          '#weight' => isset($element['#weight']) ? $element['#weight'] : 0,
+          '#delta' => $delta,
+        );
+        //coords hidden field
+        $element['ymap_coords'] = array(
+          '#type' => 'hidden', 
+          '#default_value' => $current_coords, 
+          '#weight' => isset($element['#weight']) ? $element['#weight'] : 0,
+          '#delta' => $delta,
+        );
+        //coords hidden field
+        $element['ymap_zoom'] = array(
+          '#type' => 'hidden', 
+          '#default_value' => $current_zoom, 
+          '#weight' => isset($element['#weight']) ? $element['#weight'] : 0,
+          '#delta' => $delta,
+        );
+        //search results wrapper
+        $element['search_results_wrapper'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' => '<div id="ymap-search-results"></div>',
+        );
+        //wrapper for yandex map
+        $element['ymap_wrapper'] = array(
+          '#type' => 'item',
+          '#title' => '',
+          '#markup' => '<div id="yandexmap" style="width:600px; height:300px"></div>',
+        );
+      break;
+  }
+  return $element; // возвращаем $element;
+} //function ymap_field_field_widget_form
+
+
+/**
+ * 
+ * hook_field_formatter_view implementation
+ * 
+ * @param unknown_type $entity_type
+ * @param unknown_type $entity
+ * @param unknown_type $field
+ * @param unknown_type $instance
+ * @param unknown_type $langcode
+ * @param unknown_type $items
+ * @param unknown_type $display
+ */
+function ymap_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    case 'ymap_formatter': 
+      foreach ($items as $delta => $item) {
+        if ($item['ymap_show']) {
+          //prepare settings and add javascript
+          $site_name = variable_get('site_name', t('Default name'));
+          $current_address = $item['ymap_address'];
+          $current_coords = $item['ymap_coords'];
+          $current_zoom = $item['ymap_zoom'];
+          $js_settings = array(
+            'address' => $current_address,
+            'coords' => $current_coords,
+            'edit_form' => FALSE, //whether it is a form to edit field
+            'balloon_text' => $site_name,
+            'zoom' => $current_zoom,
+          );
+          _ymap_field_add_scripts($js_settings);
+          //output current address 
+          $element[$delta]['#markup'] = $current_address;
+          //output map wrapper
+          $element[$delta]['#markup'] .= '<div id="yandexmap" style="width:600px; height:300px"></div>';
+        }
+      }
+      break;
+  }
+
+  return $element;
+} //function ymap_field_field_formatter_view
+
+
+/**
+ * 
+ * hook_field_is_empty implementation
+ * @param unknown_type $item
+ * @param unknown_type $field
+ */
+function ymap_field_field_is_empty($item, $field) {
+  if (empty($item['ymap_address']) && empty($item['ymap_coords'])) {
+    return true; 
+  } else if (!$item['ymap_show']) {
+    return true;
+  }
+} //function ymap_field_field_is_empty
+
+
+/**
+ * 
+ * Adds all the scripts
+ * 
+ * @param array $settings - settings of the script
+ */
+function _ymap_field_add_scripts($settings) {
+  //adding Yandex Maps JS
+  drupal_add_js('http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU', 'external');
+  //adding ymap_field.js
+  $path = drupal_get_path('module','ymap_field') . '/ymap_field.js';
+  drupal_add_js($path, 'file');
+  drupal_add_js(array('ymap_field' => $settings), 'setting');
+} //function _ymap_field_add_scripts

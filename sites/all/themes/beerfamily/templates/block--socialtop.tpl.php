@@ -1,0 +1,1 @@
+<span class="socials"><?php print $content ?></span>

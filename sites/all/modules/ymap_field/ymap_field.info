@@ -1,0 +1,9 @@
+name = Yandex Map Field
+description = Field to add Yandex maps to entities. User enters the address and the field displays the map for this address.
+package = Fields
+core = 7.x
+version = "7.x-1.0"
+dependencies[] = field
+
+files[] = ymap_field.install
+files[] = ymap_field.module

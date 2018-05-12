@@ -1,0 +1,29 @@
+*{margin:0;padding:0;}
+body{
+background-color: #000;
+background-image: url('img/bg.png');
+background-size: cover;
+background-repeat: no-repeat;
+}
+#content {
+margin: 0px auto;
+width: 100%;
+height: 100%;
+display: block;
+background-repeat: no-repeat;
+background-size: cover;
+}
+.fullaim {
+width: 50%;
+margin: 0px auto;
+padding-top: 40%;
+}
+.fullaim img {
+width:100%;
+}
+.img {
+text-align:center;
+float: left;
+width: 33%;
+margin-bottom:10%;
+}

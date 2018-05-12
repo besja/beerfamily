@@ -1,0 +1,38 @@
+<?php
+
+
+/**
+ * 
+ * hook_field_schema implementation
+ * 
+ * @param array $field
+ */
+function ymap_field_field_schema($field) {
+  return array(                
+    'columns' => array(          
+      'ymap_address' => array(
+        'type' => 'varchar',
+        'length' => 1023,
+        'not null' => TRUE,
+        'default' => '',         
+      ),
+      'ymap_coords' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',         
+      ),
+      'ymap_zoom' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 14,
+      ),
+      'ymap_show' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+  ); 
+} //function ymap_field_field_schema
+

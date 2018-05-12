@@ -1,0 +1,22 @@
+
+name = Beer-family
+description = Beer family design
+core = 7.x
+version = 1.0
+
+stylesheets[all][] = css/bootstrap.css
+stylesheets[all][] = css/ubuntu-font.css
+stylesheets[all][] = css/style.css
+regions[header-after] = В конце шапки
+regions[footer] = Footer
+regions[content] = Content
+regions[before-content] = Beginning of page
+regions[after-content] = End of page
+regions[intro-text] = Интро текст на главной
+regions[banner-main-1] = Баннер на главной (слайдер)
+regions[banner-main-4] = Баннер на главной левый
+regions[banner-main-5] = Баннер на главной правый
+regions[contacts] = Контакты внизу
+regions[social] = Соц сети внизу
+regions[socialtop] = Соц сети в шапке
+

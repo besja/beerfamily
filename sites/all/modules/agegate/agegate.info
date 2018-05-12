@@ -1,0 +1,8 @@
+; $Id: page_example.info,v 1.6 2010/08/11 23:16:27 rfay Exp $
+
+name = Age gate
+description = An age gate
+package = Other
+core = 7.x
+files[] = agegate.module
+

