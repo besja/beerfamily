@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 
 /**
  * @file
@@ -15,10 +14,8 @@
 /**
  * Root directory of Drupal installation.
  */
-ini_set('display_errors',0);
 define('DRUPAL_ROOT', getcwd());
+
 require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 menu_execute_active_handler();
-?>
-
